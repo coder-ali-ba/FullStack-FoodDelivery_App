@@ -8,6 +8,7 @@ const AuthCheck = (req , res , next) =>{
   const isVarified = jwt.verify(token , process.env.PRIVATEKEY)
    
   if(isVarified){
+        req.user = isVarified
         next()
   }else{
     res.json({

@@ -6,6 +6,7 @@ import jwt from "jsonwebtoken"
 import dotenv from "dotenv"
 import AuthCheck from "./MiddleWares/authMiddleWare.js";
 import cors from "cors"
+import rests from "./models/RestaurantModel/restmodel.js";
 
 
 
@@ -100,11 +101,37 @@ try {
 })
 
 
-app.post("/create" , AuthCheck ,  (req , res)=>{
-    res.json({
-        status : true,
-        message : "Created Successfully"
-    })
+// app.post("/create" , AuthCheck ,  (req , res)=>{
+//     res.json({
+//         status : true,
+//         message : "Created Successfully"
+//     })
+// })
+
+app.post("/createrestaurant" , AuthCheck , async(req , res)=>{
+    try {
+        const body = req.body
+        const userId = req.user.id
+
+        const userObj = {
+           ...body,
+           createBy : userId
+        }
+
+        const restaurants = await rests.create(userObj)
+
+        res.json({
+           message:"Created Successfully",
+           data : restaurants
+        })
+        } catch (error) {
+        res.json({
+            message : "something went wrong"
+        })
+       }
+
+    
+    
 })
 
 
