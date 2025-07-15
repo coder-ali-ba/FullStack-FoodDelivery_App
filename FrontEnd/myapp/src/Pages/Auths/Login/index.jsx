@@ -8,22 +8,26 @@ import {
 } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
-import { BASE_URL } from "../../../Utils/utility"; // replace with your actual path
+import { BASE_URL } from "../../../Utils/utility"; 
 import Cookies from "js-cookie";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const { control, handleSubmit, reset , formState: { errors } } = useForm();
+  const navigate = useNavigate()
 
   const onSubmit = async (data) => {
     try {
       setLoading(true);
-      const response = await axios.post(`${BASE_URL}/login`, data);
+      const response = await axios.post(`${BASE_URL}auth/login`, data);
       const {token} =response.data
-      console.log(token);
+      alert(response.data.message)    
       
-      Cookies.set("authToken" , token)
-      
+      if(token){
+        Cookies.set("authToken" , token)
+        navigate("/vendor-dashboard")
+      }
       
     } catch (error) {
       console.error("Login Error:", error.response?.data || error.message);
@@ -31,7 +35,7 @@ const Login = () => {
 
       setLoading(false);
       reset()
-     
+      
     }
   };
 
@@ -88,6 +92,8 @@ const Login = () => {
             />
           )}
         />
+
+        <Typography>Don't have an account <Link to="/signup">Sign Up</Link></Typography>
 
         <Button
           fullWidth

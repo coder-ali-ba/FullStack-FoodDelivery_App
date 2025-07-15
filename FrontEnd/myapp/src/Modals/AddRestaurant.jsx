@@ -27,29 +27,24 @@ const style = {
 
 export default function AddResortModal() {
   const [open, setOpen] = React.useState(false);
+  
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  
   const {control , handleSubmit , reset} = useForm()
 
   const onSubmit = async(obj) => {
      try {
-        const response =await axios.post(`${BASE_URL}/createrestaurant` , obj ,{
+        const response =await axios.post(`${BASE_URL}restaurant/create` , obj ,{
           headers :{
              Authorization : `Bearer ${Cookies.get("authToken")}`
           }
-        })
-
-        
+        })      
         alert(response.data.message)   
         reset({})    
      } catch (error) {
-        console.log(error.message);
-        
-     }
-     
-     
-     
+        console.log(error.message);       
+     }    
   }
   return (
     

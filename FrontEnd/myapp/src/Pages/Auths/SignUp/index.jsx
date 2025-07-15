@@ -13,16 +13,23 @@ import {
 import { Controller, useForm } from "react-hook-form";
 import axios from "axios";
 import { BASE_URL } from "../../../Utils/utility";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
+    const navigate = useNavigate()
     const [loading , setLoading] = useState(false)
- 
-const {control , handleSubmit , reset} = useForm()
-
-const submitHandler = async(obj) => {
-   console.log("obj :" , obj);
-   const response = await axios.post(`${BASE_URL}/signup` , obj)
-   console.log(response);  
+    const {control , handleSubmit , reset} = useForm()
+    const submitHandler = async(obj) => {
+    setLoading(true)
+     try {      
+      const response = await axios.post(`${BASE_URL}auth/signup` , obj)
+      reset() 
+      setLoading(false)
+      navigate("/vendor-dashboard")
+    
+     } catch (error) {
+       console.log(error.message);
+     } 
 }
 
   return (
@@ -105,6 +112,7 @@ const submitHandler = async(obj) => {
             )}
           />
         </FormControl>
+        <Typography>Already have an account <Link to="/">Log In</Link></Typography>
         <Button
           fullWidth
           variant="contained"
@@ -114,6 +122,8 @@ const submitHandler = async(obj) => {
         >
           {loading ? "Signing up..." : "Sign Up"}
         </Button>
+
+        
       </Box>
     </Paper>
   );

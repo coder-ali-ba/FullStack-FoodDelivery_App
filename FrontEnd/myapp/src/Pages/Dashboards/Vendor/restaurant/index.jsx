@@ -13,7 +13,8 @@ function Restaurant() {
     <VendorLayout>
         <Stack direction={"row"} justifyContent={"space-between"}>
           <Typography variant='h4'>Restaurants</Typography>
-          <AddResortModal />
+          
+            <AddResortModal/>       
           
         </Stack>
         <RestaurantCard />
