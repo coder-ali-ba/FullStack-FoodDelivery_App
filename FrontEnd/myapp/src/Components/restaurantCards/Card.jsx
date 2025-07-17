@@ -5,13 +5,17 @@ import {
   Typography,
   Chip,
   Stack,
-  Box
+  Box,
+  Button
 } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
 import axios from 'axios';
 import { BASE_URL } from '../../Utils/utility';
 import Cookies from 'js-cookie';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
+import endPoints from '../../Constants/apiEndPoints';
 
 
 const RestaurantCard = ({ restaurant }) => {
@@ -33,7 +37,7 @@ const RestaurantCard = ({ restaurant }) => {
      getRestaurants()
   },[])
   const getRestaurants = async() => {
-    const response = await axios.get(`${BASE_URL}restaurant/getall`, {
+    const response = await axios.get(`${BASE_URL}${endPoints.getResEndPoint}`, {
       headers:{
         Authorization : `Bearer ${Cookies.get("authToken")}`
       }
@@ -41,44 +45,72 @@ const RestaurantCard = ({ restaurant }) => {
     
     setDatas(response.data.data)   
   }
-  console.log(datas);
+  
+
+  const handleEdit = () => {
+    console.log("Edit Restaurant");   
+  }
+
+  const handleDelete = async(id) => {     
+    const response = await axios.delete(`${BASE_URL}${endPoints.deleteResEndPoint}/${id}` ,{
+      headers :{
+        Authorization : `Bearer ${Cookies.get("authToken")}` 
+      }
+    })
+    console.log(response);   
+  }
+  
   return (
 
-   <>
+   < >
+   <div style={{display :"flex"}}>
    {datas.map((data)=>(
-      <Card sx={{ maxWidth: 500, margin: '1rem auto', borderRadius: 3, boxShadow: 3 }}>
+      <Card sx={{ maxWidth: 350, margin: '1rem auto', borderRadius: 3, boxShadow: 3 }} >
       <CardContent>
-        <Typography variant="h5" gutterBottom>
-          {data.restaurantName}
-        </Typography>
+        <Stack direction={"row"} justifyContent={'space-between'}>
+           <Typography variant="h5" gutterBottom>
+             {data.restaurantName}
+           </Typography>
+           <Stack direction={"row"} gap={"10px"}>
+            <EditOutlinedIcon onClick={handleEdit}></EditOutlinedIcon>
+            <ClearOutlinedIcon onClick={()=>{
+              handleDelete(data._id)
+              }}>
+            </ClearOutlinedIcon>
+           </Stack>
+        </Stack>
+
 
         <Typography variant="body2" color="text.secondary" gutterBottom>
           {data.details}
         </Typography>
 
+        <Box sx={{ mt: 1 }}>        
+              <Typography variant="body2"><strong>Contact:</strong> {data.contactNumber}</Typography>
+              <Typography variant="body2"><strong>Email:</strong> {data.email}</Typography>
+              <Typography variant="body2"><strong>Address:</strong> {data.address}</Typography>
+              <Typography variant="body2"><strong>Category:</strong> {data.category}</Typography>
+        </Box>  
+
         <Stack direction="row" spacing={1} sx={{ mt: 1, mb: 2 }}>
           <Chip
-            label={isOpen ? 'Open' : 'Closed'}
-            color={isOpen ? 'success' : 'default'}
-            icon={isOpen ? <CheckCircleIcon /> : <CancelIcon />}
+            label={data.isOpen ? 'Open' : 'Closed'}
+            color={data.isOpen ? 'success' : 'default'}
+            icon={data.isOpen ? <CheckCircleIcon /> : <CancelIcon />}
           />
           <Chip
-            label={isApproved ? 'Approved' : 'Pending'}
-            color={isApproved ? 'primary' : 'warning'}
-            icon={isApproved ? <CheckCircleIcon /> : <CancelIcon />}
+            label={data.isApproved ? 'Approved' : 'Pending'}
+            color={data.isApproved ? 'primary' : 'warning'}
+            icon={data.isApproved ? <CheckCircleIcon /> : <CancelIcon />}
           />
         </Stack>      
-            <Box sx={{ mt: 1 }}>        
-              <Typography variant="body2"><strong>Contact:</strong> {contactNumber}</Typography>
-              <Typography variant="body2"><strong>Email:</strong> {email}</Typography>
-              <Typography variant="body2"><strong>Address:</strong> {address}</Typography>
-              <Typography variant="body2"><strong>Category:</strong> {category}</Typography>
-           </Box>      
+                
       </CardContent>
     </Card>
 
    ))
     }
+    </div>
     </>
  
   );

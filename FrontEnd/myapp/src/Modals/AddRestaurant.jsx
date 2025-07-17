@@ -11,6 +11,7 @@ import axios from 'axios';
 
 import Cookies from 'js-cookie';
 import { BASE_URL } from '../Utils/utility';
+import endPoints from '../Constants/apiEndPoints';
 
 
 const style = {
@@ -35,7 +36,7 @@ export default function AddResortModal() {
 
   const onSubmit = async(obj) => {
      try {
-        const response =await axios.post(`${BASE_URL}restaurant/create` , obj ,{
+        const response =await axios.post(`${BASE_URL}${endPoints.createResEndPoint}` , obj ,{
           headers :{
              Authorization : `Bearer ${Cookies.get("authToken")}`
           }
