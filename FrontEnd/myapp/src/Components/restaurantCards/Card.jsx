@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Card,
   CardContent,
@@ -16,6 +16,7 @@ import Cookies from 'js-cookie';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 import endPoints from '../../Constants/apiEndPoints';
+import UpdateRestaurantModal from '../../Modals/UpdateRestaurant';
 
 
 const RestaurantCard = ({ restaurant }) => {
@@ -31,6 +32,7 @@ const RestaurantCard = ({ restaurant }) => {
   } = restaurant || {}
 
   const [datas , setDatas] = React.useState([])
+  const [openEdit , setOpenEdit] =useState(false)
 
   
   useEffect(()=>{
@@ -48,7 +50,10 @@ const RestaurantCard = ({ restaurant }) => {
   
 
   const handleEdit = () => {
-    console.log("Edit Restaurant");   
+    console.log("Edit Restaurant");  
+    setOpenEdit(true) 
+
+    
   }
 
   const handleDelete = async(id) => {     
@@ -57,7 +62,9 @@ const RestaurantCard = ({ restaurant }) => {
         Authorization : `Bearer ${Cookies.get("authToken")}` 
       }
     })
-    console.log(response);   
+     
+
+    getRestaurants()
   }
   
   return (
@@ -78,6 +85,7 @@ const RestaurantCard = ({ restaurant }) => {
               }}>
             </ClearOutlinedIcon>
            </Stack>
+           {openEdit && <UpdateRestaurantModal setOpenEdit={setOpenEdit} editId={data.id} getAll={getRestaurants}/>}
         </Stack>
 
 

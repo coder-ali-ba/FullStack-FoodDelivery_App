@@ -56,25 +56,45 @@ const deleteRestaurantController = async(req , res) =>{
         const id =req.params.id;
         
         const body = await rests.findOne({_id : id});
-        const updateObj = {
-            ...body,
-            isDeleted : !body.isDeleted
-        }       
-        // const response = await rests.findByIdAndUpdate(id , updateObj)
+         const updateObj = {
+             isDeleted : !body.isDeleted
+     }       
+         const response = await rests.findByIdAndUpdate(id , updateObj)
         res.json({
-           message : `Got API `,
-           data : updateObj
+           message : `Soft Delete Successfully`,
+           data : response
         })  
     } catch (error) {
         res.json({
-            message: "Not Found"
+            message: "Something Went Wrong"
         })
     }
        
 }
 
+const editRestaurantController = async(req , res) => {
+    const body = req.body;
+    const id = req.params.id;
+    const editData = await rests.findByIdAndUpdate(id , body , {new : true})
+    try {
+        
+        res.json({
+           data : editData,
+           message : "Got Edit Api"
+        })
+    } catch (error) {
+        
+        res.json({
+         data : null,
+         message : "Can't Get Edit Api"
+        })
+    }
+  
+}
+
 export {
     createRestaurantController,
     getRestaurantsController,
-    deleteRestaurantController
+    deleteRestaurantController,
+    editRestaurantController
 }
