@@ -92,9 +92,33 @@ const editRestaurantController = async(req , res) => {
   
 }
 
+const openRestaurantController = async(req , res) => {
+    const id = req.params.id
+    const body = await rests.findById(id)
+    const approval =body.isApproved
+
+    if(!approval){
+        return res.json({
+            message : "Please wait for the Admins Approval"
+        })
+    }
+
+    const updateObj ={
+        isOpen : !body.isOpen
+    }
+
+    const updateApproval =await rests.findByIdAndUpdate(id , updateObj)
+
+    res.json({
+        data : updateApproval,
+        message:"Your Restaurant Status is Changed "
+    })
+}
+
 export {
     createRestaurantController,
     getRestaurantsController,
     deleteRestaurantController,
-    editRestaurantController
+    editRestaurantController,
+    openRestaurantController
 }

@@ -9,9 +9,9 @@ const AuthCheck = (req , res , next) =>{
    
   if(isVarified){
         req.user = isVarified
-        next()
+       return next()
   }else{
-    res.json({
+      return res.json({
         status:false,
         message : "Authorization Error"
       })
@@ -19,7 +19,7 @@ const AuthCheck = (req , res , next) =>{
   } catch (error) {
     res.json({
         status:false,
-        message : "Authorization Error"
+        message : error.message
       })
   }
 

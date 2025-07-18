@@ -23,21 +23,28 @@ const style = {
   p: 4,
 };
 
-export default function UpdateRestaurantModal({setOpenEdit , editId , getRestaurants}) {
+export default function UpdateRestaurantModal({setOpenEdit , editId , getAll}) {
  
- const {handleSubmit , control , reset } = useForm() 
+ const {handleSubmit , control } = useForm() 
+
+
+ 
  const onSubmit = async(obj) => {
-   console.log(editId);
-  
-    // const response = await axios.put(`${BASE_URL}${endPoints.editResEndPoint}/${editId}` , obj ,{
-    //   headers : {
-    //     Authorization : `Bearer ${Cookies.get("authToken")}`
-    //   }
-    // });
-    // console.log(response);
+  try {
+    const response = await axios.put(`${BASE_URL}${endPoints.editResEndPoint}/${editId}` , obj ,{
+      headers : {
+        Authorization : `Bearer ${Cookies.get("authToken")}`
+      }
+    });
+    console.log(response);
     
-    // setOpenEdit(false)
-    // getRestaurants()
+    setOpenEdit(false)
+    getAll()
+  } catch (error) {
+    console.log(error.message);    
+  }
+  
+    
  }
 
   return (

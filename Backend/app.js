@@ -16,7 +16,9 @@ mongoose.connect(URI)
 .catch(()=>console.log("connection Error"))
 
 const app = express()
-app.use(cors())
+app.use(cors({
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+}))
 app.use(express.json())
 app.use(express.urlencoded({extended :true}))
 

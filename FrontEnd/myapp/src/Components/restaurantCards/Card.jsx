@@ -19,45 +19,44 @@ import endPoints from '../../Constants/apiEndPoints';
 import UpdateRestaurantModal from '../../Modals/UpdateRestaurant';
 
 
-const RestaurantCard = ({ restaurant }) => {
-  const {
-    restaurantName,
-    details,
-    contactNumber,
-    address,
-    email,
-    category,
-    isOpen,
-    isApproved
-  } = restaurant || {}
+const RestaurantCard = () => {
+ 
 
   const [datas , setDatas] = React.useState([])
   const [openEdit , setOpenEdit] =useState(false)
+  const [idToEdit , setIdToEdit] = useState(null)
 
   
   useEffect(()=>{
      getRestaurants()
   },[])
   const getRestaurants = async() => {
-    const response = await axios.get(`${BASE_URL}${endPoints.getResEndPoint}`, {
+    try {
+      const response = await axios.get(`${BASE_URL}${endPoints.getResEndPoint}`, {
       headers:{
         Authorization : `Bearer ${Cookies.get("authToken")}`
       }
     })
     
-    setDatas(response.data.data)   
+    setDatas(response.data.data)  
+      
+    } catch (error) {
+      console.log(error.message);
+      
+    }
+     
   }
   
 
-  const handleEdit = () => {
+  const handleEdit = (id) => {
     console.log("Edit Restaurant");  
-    setOpenEdit(true) 
-
-    
+    setIdToEdit(id)
+    setOpenEdit(true)  
   }
 
-  const handleDelete = async(id) => {     
-    const response = await axios.delete(`${BASE_URL}${endPoints.deleteResEndPoint}/${id}` ,{
+  const handleDelete = async(id) => {    
+    try {
+      const response = await axios.delete(`${BASE_URL}${endPoints.deleteResEndPoint}/${id}` ,{
       headers :{
         Authorization : `Bearer ${Cookies.get("authToken")}` 
       }
@@ -65,12 +64,50 @@ const RestaurantCard = ({ restaurant }) => {
      
 
     getRestaurants()
+    } catch (error) {
+      console.log(error.message);
+      
+    } 
+    
   }
+
+  const handleApprove = async(id) =>{    
+      try {
+        const response = await axios.patch(`${BASE_URL}${endPoints.approveResEndPoint}/${id}`,{} ,{
+        headers :{
+          Authorization : `Bearer ${Cookies.get("authToken")}` 
+        }
+      })
+
+
+    //   const upar = response.data.data.isOpen
+    //   if(upar){
+    //       alert("Your Restaurant is Closed")
+    //   }
+    //  if(!upar){
+    //       alert("Your Restaurant is Opened")
+    //   }
+    alert(response.data.message)
+      
+
+
+      
+      
+      getRestaurants()
+       
+      } catch (error) {
+        console.log(error.message);       
+      }
+      
+      
+  }
+
+  
   
   return (
 
    < >
-   <div style={{display :"flex"}}>
+   <div style={{display :"flex" , flexWrap:"wrap"}}>
    {datas.map((data)=>(
       <Card sx={{ maxWidth: 350, margin: '1rem auto', borderRadius: 3, boxShadow: 3 }} >
       <CardContent>
@@ -79,13 +116,13 @@ const RestaurantCard = ({ restaurant }) => {
              {data.restaurantName}
            </Typography>
            <Stack direction={"row"} gap={"10px"}>
-            <EditOutlinedIcon onClick={handleEdit}></EditOutlinedIcon>
+            <EditOutlinedIcon onClick={()=>handleEdit(data._id)}></EditOutlinedIcon>
             <ClearOutlinedIcon onClick={()=>{
               handleDelete(data._id)
               }}>
             </ClearOutlinedIcon>
            </Stack>
-           {openEdit && <UpdateRestaurantModal setOpenEdit={setOpenEdit} editId={data.id} getAll={getRestaurants}/>}
+           
         </Stack>
 
 
@@ -93,7 +130,9 @@ const RestaurantCard = ({ restaurant }) => {
           {data.details}
         </Typography>
 
-        <Box sx={{ mt: 1 }}>        
+        <Box sx={{ mt: 1 }}> 
+               {openEdit && <UpdateRestaurantModal setOpenEdit={setOpenEdit} editId={idToEdit} getAll={getRestaurants}/>}       
+             {/* <Typography>{data._id}</Typography> */}
               <Typography variant="body2"><strong>Contact:</strong> {data.contactNumber}</Typography>
               <Typography variant="body2"><strong>Email:</strong> {data.email}</Typography>
               <Typography variant="body2"><strong>Address:</strong> {data.address}</Typography>
@@ -105,6 +144,9 @@ const RestaurantCard = ({ restaurant }) => {
             label={data.isOpen ? 'Open' : 'Closed'}
             color={data.isOpen ? 'success' : 'default'}
             icon={data.isOpen ? <CheckCircleIcon /> : <CancelIcon />}
+            onClick={()=>{
+              handleApprove(data._id)
+            }}
           />
           <Chip
             label={data.isApproved ? 'Approved' : 'Pending'}
