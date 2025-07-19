@@ -22,10 +22,7 @@ const Signup = () => {
 
 
 
-    const handleImageChange = (event) => {
-      console.log(event.target.files[0]);
-      
-    }
+    
 
     const submitHandler = async(obj) => {
     setLoading(true)
@@ -122,15 +119,7 @@ const Signup = () => {
         </FormControl>  
 
 
-        <Button variant="contained" component="label">
-        Upload Image
-        <input
-          type="file"
-          accept="image/*"
-          hidden
-          onChange={(event)=>{handleImageChange(event)}}
-        />
-      </Button>
+       
 
 
 

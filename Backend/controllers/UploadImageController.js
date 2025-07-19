@@ -5,6 +5,12 @@ import fs from "fs"
 const UploadImageController = async(req , res) => {
     try {
         const filePath =req.files[0].path;
+        if(!filePath){
+            return res.json({
+                message : "File not found"
+            })
+        }
+
         const resImage =await cloudinaryUploader.upload(filePath)
 
         fs.unlink(filePath , (error , res)=>{
@@ -12,7 +18,7 @@ const UploadImageController = async(req , res) => {
         })
        res.json({
            message : " Got Image Uploader",
-           data : resImage
+           data : resImage.secure_url
 
         })
     } catch (error) {

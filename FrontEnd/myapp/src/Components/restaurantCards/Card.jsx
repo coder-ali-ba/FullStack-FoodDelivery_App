@@ -91,7 +91,9 @@ const RestaurantCard = () => {
    {datas.map((data)=>(
       <Card sx={{ maxWidth: 350, margin: '1rem auto', borderRadius: 3, boxShadow: 3 }} >
       <CardContent>
+        
         <Stack direction={"row"} justifyContent={'space-between'}>
+           
            <Typography variant="h5" gutterBottom>
              {data.restaurantName}
            </Typography>
@@ -104,7 +106,7 @@ const RestaurantCard = () => {
            </Stack>
            
         </Stack>
-
+        <img src={data.imageUrl} style={{height:"200px", width:"100%"}} />
 
         <Typography variant="body2" color="text.secondary" gutterBottom>
           {data.details}

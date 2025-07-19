@@ -8,6 +8,7 @@ import uploadRouter from "./routes/UploadImageRoutes.js";
 import { cloudinaryConfig } from "./Config/cloudinaryConfig.js";
 
 dotenv.config()
+cloudinaryConfig()
 
 
 const PORT = process.env.PORT || 5050

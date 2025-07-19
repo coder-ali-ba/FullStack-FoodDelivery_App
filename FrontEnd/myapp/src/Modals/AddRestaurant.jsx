@@ -28,15 +28,46 @@ const style = {
 
 export default function AddResortModal() {
   const [open, setOpen] = React.useState(false);
+  const [image , setImage] =React.useState()
   
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
   
   const {control , handleSubmit , reset} = useForm()
 
+
+  const handleImageChange = (event) => {
+      setImage(event.target.files[0])    
+    }
+    
   const onSubmit = async(obj) => {
+    
      try {
-        const response =await axios.post(`${BASE_URL}${endPoints.createResEndPoint}` , obj ,{
+      
+      let profileURL;
+      const api = `${BASE_URL}${endPoints.addPhoto}`
+      const formData = new FormData();
+      formData.append("image" , image)
+
+       const uploadImage = await axios.post(api , formData , {
+        headers :{
+          "Content-Type" : "multipart/form-data",
+          "Authorization" : `Bearer ${Cookies.get("authToken")}`
+        }
+       })
+
+       
+      profileURL = uploadImage.data.data
+       
+
+       const objToSend = {
+          ...obj,
+          imageUrl: profileURL || null
+       }
+      
+
+        const response =await axios.post(`${BASE_URL}${endPoints.createResEndPoint}` , objToSend ,{
           headers :{
              Authorization : `Bearer ${Cookies.get("authToken")}`
           }
@@ -151,6 +182,16 @@ export default function AddResortModal() {
                     />                   
                    )}
                 />
+
+                 <Button variant="contained" component="label" sx={{marginTop:"10px", marginBottom:"10px"}}>
+                        Upload Image
+                        <input
+                          type="file"
+                          accept="image/*"
+                          hidden
+                          onChange={(event)=>{handleImageChange(event)}}
+                        />
+                 </Button>
 
                 <Button variant='contained' type='submit'>Create Restaurant</Button>
             </Stack>
