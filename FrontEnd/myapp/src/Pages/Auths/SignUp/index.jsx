@@ -19,6 +19,14 @@ const Signup = () => {
     const navigate = useNavigate()
     const [loading , setLoading] = useState(false)
     const {control , handleSubmit , reset} = useForm()
+
+
+
+    const handleImageChange = (event) => {
+      console.log(event.target.files[0]);
+      
+    }
+
     const submitHandler = async(obj) => {
     setLoading(true)
      try {      
@@ -30,7 +38,7 @@ const Signup = () => {
      } catch (error) {
        console.log(error.message);
      } 
-}
+    }
 
   return (
     <Paper elevation={3} sx={{ p: 4, maxWidth: 400, mx: "auto", mt: 5 }}>
@@ -111,7 +119,21 @@ const Signup = () => {
                </Select>
             )}
           />
-        </FormControl>
+        </FormControl>  
+
+
+        <Button variant="contained" component="label">
+        Upload Image
+        <input
+          type="file"
+          accept="image/*"
+          hidden
+          onChange={(event)=>{handleImageChange(event)}}
+        />
+      </Button>
+
+
+
         <Typography>Already have an account <Link to="/">Log In</Link></Typography>
         <Button
           fullWidth

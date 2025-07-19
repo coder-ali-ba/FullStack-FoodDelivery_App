@@ -61,14 +61,10 @@ const RestaurantCard = () => {
         Authorization : `Bearer ${Cookies.get("authToken")}` 
       }
     })
-     
-
     getRestaurants()
     } catch (error) {
       console.log(error.message);
-      
-    } 
-    
+    }   
   }
 
   const handleApprove = async(id) =>{    
@@ -78,28 +74,12 @@ const RestaurantCard = () => {
           Authorization : `Bearer ${Cookies.get("authToken")}` 
         }
       })
-
-
-    //   const upar = response.data.data.isOpen
-    //   if(upar){
-    //       alert("Your Restaurant is Closed")
-    //   }
-    //  if(!upar){
-    //       alert("Your Restaurant is Opened")
-    //   }
-    alert(response.data.message)
-      
-
-
-      
-      
+      alert(response.data.message)     
       getRestaurants()
        
       } catch (error) {
         console.log(error.message);       
-      }
-      
-      
+      }     
   }
 
   
