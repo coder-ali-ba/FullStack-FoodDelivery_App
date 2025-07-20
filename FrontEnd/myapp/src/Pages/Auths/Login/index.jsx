@@ -21,12 +21,20 @@ const Login = () => {
     try {
       setLoading(true);
       const response = await axios.post(`${BASE_URL}auth/login`, data);
-      const {token} =response.data
+      const {token} =response.data;
+      const verify =response.data.data.type
       alert(response.data.message)    
       
       if(token){
         Cookies.set("authToken" , token)
-        navigate("/vendor-dashboard")
+        if(verify =="admin"){
+          navigate("/admin-dashboard")
+        }else if(verify=="vendor"){
+          navigate('/vendor-dashboard')
+        }
+        
+        // navigate("/vendor-dashboard")
+
       }
       
     } catch (error) {

@@ -1,5 +1,5 @@
 import express from "express";
-import AuthCheck from "../MiddleWares/authMiddleWare.js";
+
 import { 
     createRestaurantController, 
     deleteRestaurantController, 
@@ -7,6 +7,7 @@ import {
     getRestaurantsController, 
     openRestaurantController 
 } from "../controllers/RestaurantControllers.js";
+import { AuthCheck } from "../MiddleWares/authMiddleWare.js";
 
 const restaurantRouter = express.Router()
 

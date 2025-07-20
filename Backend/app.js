@@ -6,6 +6,7 @@ import authRouter from "./routes/AuthRoutes.js";
 import restaurantRouter from "./routes/RestaurantRoutes.js";
 import uploadRouter from "./routes/UploadImageRoutes.js";
 import { cloudinaryConfig } from "./Config/cloudinaryConfig.js";
+import Adminrouter from "./routes/AdminRoutes.js";
 
 dotenv.config()
 cloudinaryConfig()
@@ -30,6 +31,7 @@ app.use(express.urlencoded({extended :true}))
 app.use("/api/auth" , authRouter)
 app.use("/api/restaurant"  , restaurantRouter)
 app.use('/api/image' , uploadRouter)
+app.use('/api/admin' , Adminrouter)
 
 
 

@@ -6,6 +6,9 @@ import VendorDashboard from './Pages/Dashboards/Vendor/dashboard/Index'
 import Menu from './Pages/Dashboards/Vendor/menu'
 import Order from './Pages/Dashboards/Vendor/order'
 import Restaurant from './Pages/Dashboards/Vendor/restaurant'
+import Admindashboard from './Pages/Dashboards/Admin/Dashboard'
+import AdminDashboard from './Pages/Dashboards/Admin/Dashboard'
+import AllRestaurants from './Pages/Dashboards/Admin/All-Restaurants'
 
 function App() {
   
@@ -18,11 +21,21 @@ function App() {
       <Route path='/signup' element={<Signup />}></Route>
 
 
+      
+
       <Route path='/vendor-dashboard' element={<VendorDashboard />}></Route>
       <Route path='/vendor-menu' element={<Menu />}></Route>
       <Route path='/vendor-order' element={<Order />}></Route>
       <Route path='/vendor-restaurant' element={<Restaurant />}></Route>
-    </Routes>
+
+
+      //AdminRoutes
+       {/* //<Route path='/admin-dashboard' element={<Adm />}></Route> */}
+       <Route path="/admin-dashboard" element={<AdminDashboard/>}></Route>
+       <Route path="/all-restaurant" element={<AllRestaurants/>}></Route> 
+       <Route path="/admin-order"  element={<Order />}></Route>
+       
+        </Routes>
       
     </>
   )
