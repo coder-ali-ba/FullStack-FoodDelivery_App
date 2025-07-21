@@ -30,7 +30,7 @@ const Signup = () => {
       const response = await axios.post(`${BASE_URL}auth/signup` , obj)
       reset() 
       setLoading(false)
-      navigate("/vendor-dashboard")
+      navigate("/")
     
      } catch (error) {
        console.log(error.message);

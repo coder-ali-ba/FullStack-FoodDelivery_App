@@ -37,6 +37,7 @@ const RestaurantCard = () => {
         Authorization : `Bearer ${Cookies.get("authToken")}`
       }
     })
+    // console.log(response);
     
     setDatas(response.data.data)  
       
@@ -46,6 +47,7 @@ const RestaurantCard = () => {
     }
      
   }
+   console.log(datas);
   
 
   const handleEdit = (id) => {
@@ -114,7 +116,7 @@ const RestaurantCard = () => {
 
         <Box sx={{ mt: 1 }}> 
                {openEdit && <UpdateRestaurantModal setOpenEdit={setOpenEdit} editId={idToEdit} getAll={getRestaurants}/>}       
-             {/* <Typography>{data._id}</Typography> */}
+             
               <Typography variant="body2"><strong>Contact:</strong> {data.contactNumber}</Typography>
               <Typography variant="body2"><strong>Email:</strong> {data.email}</Typography>
               <Typography variant="body2"><strong>Address:</strong> {data.address}</Typography>
@@ -142,6 +144,7 @@ const RestaurantCard = () => {
 
    ))
     }
+    {/* <h1>iyuihi</h1> */}
     </div>
     </>
  

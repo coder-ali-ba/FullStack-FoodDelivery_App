@@ -1,10 +1,12 @@
 import express from "express";
-import getAllRestaurantController from "../controllers/AdminControllers.js";
-import { AdminAuthCheck } from "../MiddleWares/authMiddleWare.js";
+
+import { AdminAuthCheck, AuthCheck } from "../MiddleWares/authMiddleWare.js";
+import { getAllRestaurantController, restaurantApprovalController } from "../controllers/AdminControllers.js";
 
 const Adminrouter =express.Router()
 
 Adminrouter.get("/allrestaurants" ,AdminAuthCheck , getAllRestaurantController)
+Adminrouter.patch("/approve-restaurant/:id" ,AdminAuthCheck , restaurantApprovalController)
 
 
 export default Adminrouter

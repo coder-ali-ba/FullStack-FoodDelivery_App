@@ -4,7 +4,11 @@ const endPoints = {
     deleteResEndPoint : "restaurant/delete",
     editResEndPoint : "restaurant/edit",
     approveResEndPoint :"restaurant/approve",
-    addPhoto :"image/upload"
+    addPhoto :"image/upload",
+
+    //Admin
+    getAdminEndPoint : "admin/allrestaurants",
+    approveEndPoint : 'admin/approve-restaurant'
 
 }
 export default endPoints

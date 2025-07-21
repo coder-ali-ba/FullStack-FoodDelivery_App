@@ -29,15 +29,15 @@ const AuthCheck = (req , res , next) =>{
 
 
 const AdminAuthCheck = async(req , res , next) =>{
+  
   try {
       const token = req.headers.authorization.split(" ")[1]
 
-  const isVarified = jwt.verify(token , process.env.PRIVATEKEY)
+      const isVarified = jwt.verify(token , process.env.PRIVATEKEY)
 
   
-
-   
-  if(isVarified?.id){
+ 
+  if(isVarified){
     const user = await auths.findById(isVarified.id)
         if(user.type !== "admin"){
           return res.json({
