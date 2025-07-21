@@ -1,3 +1,4 @@
+import menuModel from "../models/menuModel/menuModal.js"
 import rests from "../models/RestaurantModel/restmodel.js"
 
 const createRestaurantController =async(req , res)=>{
@@ -115,10 +116,53 @@ const openRestaurantController = async(req , res) => {
     })
 }
 
+
+const getAllrestaurantName = async (req , res) => {
+    try {
+        const id = req.user.id;
+        const filter = {
+            createBy : id,
+            isApproved :true,
+            isDeleted :false
+        }
+        const response = await rests.find(filter)
+        res.json({
+            data :response,
+            message : "susskassfull"
+        })
+    } catch (error) {
+        res.json({
+            data :null,
+            message : "UNNNNsusskassfull"
+        })
+    }
+}
+
+
+const createMenu = async(req , res) => {
+
+    try {
+        const body = req.body;
+        const response =await menuModel.create(body)
+        res.json({
+          message : "got api",
+          data : response
+        })
+    } catch (error) {
+        res.json({
+          message : "cannot get api",
+          data : null
+        })
+    }
+     
+}
+
 export {
     createRestaurantController,
     getRestaurantsController,
     deleteRestaurantController,
     editRestaurantController,
-    openRestaurantController
+    openRestaurantController,
+    createMenu,
+    getAllrestaurantName
 }

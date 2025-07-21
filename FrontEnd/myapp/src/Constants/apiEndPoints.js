@@ -5,6 +5,8 @@ const endPoints = {
     editResEndPoint : "restaurant/edit",
     approveResEndPoint :"restaurant/approve",
     addPhoto :"image/upload",
+    getAllNames : "restaurant/rests-names",
+    addmenuEndpoint :"restaurant/create-menu",
 
     //Admin
     getAdminEndPoint : "admin/allrestaurants",
