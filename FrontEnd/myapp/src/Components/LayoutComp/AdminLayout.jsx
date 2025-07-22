@@ -55,6 +55,11 @@ function AdminLayout(props) {
     url : "/all-restaurant",
     icon : <MenuBookIcon />
    }, 
+   { 
+    name :'Menu',
+    url : "/admin-menu",
+    icon : <MenuBookIcon />
+   },
    {
     name :'Orders',
     url :"/admin-order",

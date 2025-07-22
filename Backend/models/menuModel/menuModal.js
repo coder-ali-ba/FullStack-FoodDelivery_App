@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose";
+import { type } from "os";
 
 const menuSchema = new mongoose.Schema({
     itemName : {
@@ -17,6 +18,12 @@ const menuSchema = new mongoose.Schema({
         type : String,
         required : true
     },
+    imageURL : String,
+    createBy : String,
+    isApproved :{
+        type : Boolean,
+        default : false
+    }
 })
 
 const menuModel = mongoose.model("menues" , menuSchema)

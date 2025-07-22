@@ -140,10 +140,14 @@ const getAllrestaurantName = async (req , res) => {
 
 
 const createMenu = async(req , res) => {
-
+    const id = req.user.id
     try {
         const body = req.body;
-        const response =await menuModel.create(body)
+        const obj ={
+            ...body,
+            createBy : id
+        }
+        const response =await menuModel.create(obj)
         res.json({
           message : "got api",
           data : response

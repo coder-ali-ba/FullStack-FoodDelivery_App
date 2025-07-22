@@ -29,6 +29,7 @@ export default function MenuModal({Close}) {
   const {control, handleSubmit  } = useForm()
 
   const [names , setNames] = React.useState([])
+  const [image , setImage] = React.useState()
 
  React.useEffect(()=>{
     getNames()
@@ -43,18 +44,47 @@ export default function MenuModal({Close}) {
     setNames(allNames.data.data)
  }
 
+ const handleImageChange = (event) => {
+      setImage(event.target.files[0])
+ }
 
-  const submitHandler=(obj)=>{
-     const response = axios.post(`${BASE_URL}${endPoints.addmenuEndpoint}`,obj,{
+ console.log(image);
+ 
+
+
+  const submitHandler=async(obj)=>{
+     let profileURL;
+      const api = `${BASE_URL}${endPoints.addPhoto}`
+      const formData = new FormData();
+      formData.append("image" , image)
+
+       const uploadImage = await axios.post(api , formData , {
+        headers :{
+          "Content-Type" : "multipart/form-data",
+          "Authorization" : `Bearer ${Cookies.get("authToken")}`
+        }
+       })
+
+       
+      profileURL = uploadImage.data.data
+
+      const objToSent = {
+        ...obj,
+        imageURL: profileURL
+      }
+
+
+     const response = axios.post(`${BASE_URL}${endPoints.addmenuEndpoint}`,objToSent,{
         headers : {
             Authorization : `Bearer ${Cookies.get("authToken")}`
         }
-     })   
-
-     console.log(response);
-     
+     })  
+     console.log(response);      
   }
 
+
+  
+  
 
   
   
@@ -141,6 +171,17 @@ export default function MenuModal({Close}) {
               />
               )}
             />
+
+
+            <Button variant="contained" component="label" sx={{marginTop:"10px", marginBottom:"10px"}}>
+                        Upload Image
+                        <input
+                          type="file"
+                          accept="image/*"
+                          hidden
+                          onChange={(event)=>{handleImageChange(event)}}
+                        />
+                 </Button>
 
             <Button
                fullWidth

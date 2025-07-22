@@ -10,7 +10,13 @@ const endPoints = {
 
     //Admin
     getAdminEndPoint : "admin/allrestaurants",
-    approveEndPoint : 'admin/approve-restaurant'
+    approveEndPoint : 'admin/approve-restaurant',
+
+    //Menu
+    getAllMenues : "menu/getall",
+    adminMenues : "menu/getforadmin",
+    deleteMenu : "menu/delete",
+    menuActivate : "menu/changestatus"
 
 }
 export default endPoints
