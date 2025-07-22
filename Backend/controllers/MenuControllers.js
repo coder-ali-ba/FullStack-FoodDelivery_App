@@ -10,7 +10,7 @@ const getAllMenues = async(req , res) => {
 }
 
 const menuForAdmin = async (req , res ) => {
-    const datas = await menuModel.find()
+    const datas = await menuModel.find({})
     res.json({
         message : "susskassfullyyyyyyy",
         data : datas
@@ -40,9 +40,18 @@ const changeMenuStatus = async (req , res) => {
     })
 }
 
+const getApprovedMenu = async (req , res) => {  
+    const approvedMenu = await menuModel.find({isApproved : true})
+    res.json({
+        message : "got approved menu",
+        data : approvedMenu
+    })
+}
+
 export { 
     getAllMenues,
     menuForAdmin,
     deleteMenu,
-    changeMenuStatus
+    changeMenuStatus,
+    getApprovedMenu
 }

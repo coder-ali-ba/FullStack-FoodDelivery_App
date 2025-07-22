@@ -31,6 +31,8 @@ const Login = () => {
           navigate("/admin-dashboard")
         }else if(verify=="vendor"){
           navigate('/vendor-dashboard')
+        }else{
+          navigate("/client-dashboard")
         }
         
         // navigate("/vendor-dashboard")

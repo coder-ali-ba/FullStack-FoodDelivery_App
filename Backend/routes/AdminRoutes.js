@@ -5,7 +5,7 @@ import { getAllRestaurantController, restaurantApprovalController } from "../con
 
 const Adminrouter =express.Router()
 
-Adminrouter.get("/allrestaurants" ,AdminAuthCheck , getAllRestaurantController)
+Adminrouter.get("/allrestaurants" ,AuthCheck , getAllRestaurantController)
 Adminrouter.patch("/approve-restaurant/:id" ,AdminAuthCheck , restaurantApprovalController)
 
 

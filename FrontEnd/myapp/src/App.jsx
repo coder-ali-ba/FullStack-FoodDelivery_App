@@ -11,6 +11,10 @@ import AdminDashboard from './Pages/Dashboards/Admin/Dashboard'
 import AllRestaurants from './Pages/Dashboards/Admin/All-Restaurants'
 import Orders from './Pages/Dashboards/Admin/Orders'
 import AllMenu from './Pages/Dashboards/Admin/AllMenu'
+import ClientDashboard from './Pages/Dashboards/Client/ClientDashboard'
+import ClientRestaurant from './Pages/Dashboards/Client/ClientRestaurant'
+import ClientMenu from './Pages/Dashboards/Client/ClientMenu'
+import ClientOrders from './Pages/Dashboards/Client/ClientOrders'
 
 function App() {
   
@@ -37,6 +41,12 @@ function App() {
        <Route path="/all-restaurant" element={<AllRestaurants/>}></Route> 
        <Route path="/admin-order"  element={<Orders />}></Route>
        <Route path="/admin-menu"  element={<AllMenu />}></Route>
+
+       //Client
+       <Route path='/client-dashboard' element={<ClientDashboard/>}></Route>
+       <Route path='/client-restaurant' element={<ClientRestaurant/>}></Route>
+       <Route path='/client-menu' element={<ClientMenu/>}></Route>
+       <Route path='/client-order' element={<ClientOrders/>}></Route>
        
         </Routes>
       

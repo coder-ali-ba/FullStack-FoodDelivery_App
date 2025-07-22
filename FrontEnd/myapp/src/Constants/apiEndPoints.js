@@ -16,7 +16,11 @@ const endPoints = {
     getAllMenues : "menu/getall",
     adminMenues : "menu/getforadmin",
     deleteMenu : "menu/delete",
-    menuActivate : "menu/changestatus"
+    menuActivate : "menu/changestatus",
+
+
+    //Client
+    approvedMenu : "menu/getapprovedmenu"
 
 }
 export default endPoints
