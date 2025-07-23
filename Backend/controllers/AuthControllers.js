@@ -1,6 +1,7 @@
 import auths from "../models/userModel/userModel.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken"
+import nodemailer from "nodemailer"
 
 
 
@@ -20,6 +21,31 @@ const signupController = async (req , res)=>{
         const user = {...body , password : pass}
 
         const allUsers = await auths.create(user)
+
+        
+
+        const transporter = nodemailer.createTransport({
+           service : "Gmail",
+           host: "smtp.gmail.com",
+           port: 465,
+           secure: true, // true for 465, false for other ports
+           auth: {
+            user: process.env.EMAILADDRESS,
+            pass: process.env.PASS_KEY,
+           },
+        });
+
+        const mailOptions = {
+            from: process.env.EMAILADDRESS,
+            to: body.email,
+            subject: "User Signup",
+            text: 'This is the plain text body',
+            html: '<b>This is the HTML body</b>'
+        };
+
+        await transporter.sendMail(mailOptions)
+
+
 
         res.json({
           status : true,

@@ -32,6 +32,7 @@ export default function PlaceOrder({close , item}) {
           }
         })
         console.log(response);
+        
 
         alert("your Order has been placed please wait for response")
   }
