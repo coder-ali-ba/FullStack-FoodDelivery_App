@@ -16,7 +16,7 @@ const restModel = new mongoose.Schema({
         default: false
     },
 
-    createBy: String, // create user relation using ref
+    createBy: String, 
 
     createAt: {
         type: Date,

@@ -8,6 +8,7 @@ import uploadRouter from "./routes/UploadImageRoutes.js";
 import { cloudinaryConfig } from "./Config/cloudinaryConfig.js";
 import Adminrouter from "./routes/AdminRoutes.js";
 import MenuRouter from "./routes/MenuRoutes.js";
+import orderRouter from "./routes/OrderRoutes.js";
 
 dotenv.config()
 cloudinaryConfig()
@@ -34,6 +35,7 @@ app.use("/api/restaurant"  , restaurantRouter)
 app.use('/api/image' , uploadRouter)
 app.use('/api/admin' , Adminrouter)
 app.use("/api/menu" , MenuRouter)
+app.use("/api/order" , orderRouter)
 
 
 
