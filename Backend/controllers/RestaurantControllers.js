@@ -1,3 +1,4 @@
+import { response } from "express"
 import menuModel from "../models/menuModel/menuModal.js"
 import rests from "../models/RestaurantModel/restmodel.js"
 
@@ -161,6 +162,28 @@ const createMenu = async(req , res) => {
      
 }
 
+const getApprovedRestaurants = async(req , res) =>{
+    const ApprovedRestaunts = await rests.find({
+        isApproved : true,
+        isDeleted : false
+    })
+    res.json({
+        message : "Got Approved restaurants",
+        data : ApprovedRestaunts
+    })
+}
+
+const getSingleRestaurant = async (req , res) => {
+
+    const id = req.params.id
+
+    const menues = await menuModel.find({restaurantName : id})
+    res.json({
+        message : "hitted",
+        data : menues
+    })
+}
+
 export {
     createRestaurantController,
     getRestaurantsController,
@@ -168,5 +191,7 @@ export {
     editRestaurantController,
     openRestaurantController,
     createMenu,
-    getAllrestaurantName
+    getAllrestaurantName,
+    getApprovedRestaurants,
+    getSingleRestaurant
 }

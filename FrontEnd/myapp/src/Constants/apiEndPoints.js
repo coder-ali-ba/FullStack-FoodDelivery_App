@@ -7,6 +7,8 @@ const endPoints = {
     addPhoto :"image/upload",
     getAllNames : "restaurant/rests-names",
     addmenuEndpoint :"restaurant/create-menu",
+    getApprovedRestaurant : "restaurant/getapproved",
+
 
     //Admin
     getAdminEndPoint : "admin/allrestaurants",
@@ -21,7 +23,8 @@ const endPoints = {
 
     //Client
     approvedMenu : "menu/getapprovedmenu",
-    placeOrder : "order/placeorder"
+    placeOrder : "order/placeorder",
+    getSingleRest : "restaurant/getsinglerest"
 
 }
 export default endPoints

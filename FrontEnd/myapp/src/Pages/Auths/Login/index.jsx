@@ -17,30 +17,36 @@ const Login = () => {
   const { control, handleSubmit, reset , formState: { errors } } = useForm();
   const navigate = useNavigate()
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (obj) => {
     try {
       setLoading(true);
-      const response = await axios.post(`${BASE_URL}auth/login`, data);
-      const {token} =response.data;
-      const verify =response.data.data.type
-      alert(response.data.message)    
+      const response = await axios.post(`${BASE_URL}auth/login`, obj);
+      const {token , data} =response.data;
+       const verify =data.type
+       alert(data.message)
+      
+      
+          
+      
       
       if(token){
         Cookies.set("authToken" , token)
         if(verify =="admin"){
           navigate("/admin-dashboard")
-        }else if(verify=="vendor"){
-          navigate('/vendor-dashboard')
-        }else if(verify == "customer"){
-          navigate("/client-dashboard")
+          alert("ADMIN")
         }
-        
-        // navigate("/vendor-dashboard")
-
+         if(verify=="vendor"){
+          navigate('/vendor-dashboard')
+          alert('VENDOR')
+        }
+         if(verify == "customer"){
+          navigate("/client-dashboard")
+          alert("CUSTOMER")
+        }
       }
       
     } catch (error) {
-      console.error("Login Error:", error.response?.data || error.message);
+      console.error("Login Error:" , error.message);
     } finally {
 
       setLoading(false);

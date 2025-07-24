@@ -6,7 +6,9 @@ import {
     deleteRestaurantController, 
     editRestaurantController, 
     getAllrestaurantName, 
+    getApprovedRestaurants, 
     getRestaurantsController, 
+    getSingleRestaurant, 
     openRestaurantController 
 } from "../controllers/RestaurantControllers.js";
 import { AuthCheck } from "../MiddleWares/authMiddleWare.js";
@@ -20,6 +22,8 @@ restaurantRouter.put("/edit/:id" , AuthCheck , editRestaurantController)
 restaurantRouter.patch("/approve/:id" , AuthCheck , openRestaurantController)
 restaurantRouter.post("/create-menu" ,AuthCheck ,  createMenu)
 restaurantRouter.get("/rests-names" ,AuthCheck ,  getAllrestaurantName)
+restaurantRouter.get("/getapproved" ,AuthCheck ,  getApprovedRestaurants)
+restaurantRouter.get("/getsinglerest/:id" ,AuthCheck ,  getSingleRestaurant)
 
 
 export default restaurantRouter
