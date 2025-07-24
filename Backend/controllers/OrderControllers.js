@@ -21,4 +21,13 @@ const placeOrder = async(req , res)=>{
     })
 }
 
-export default placeOrder
+const orderMultipleItems = async(req , res)=>{
+    res.json({
+        message : "place Multiple"
+    })
+}
+
+export {
+     placeOrder,
+     orderMultipleItems  
+}

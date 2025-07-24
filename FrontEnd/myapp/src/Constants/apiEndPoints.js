@@ -24,7 +24,8 @@ const endPoints = {
     //Client
     approvedMenu : "menu/getapprovedmenu",
     placeOrder : "order/placeorder",
-    getSingleRest : "restaurant/getsinglerest"
+    getSingleRest : "restaurant/getsinglerest",
+    multipleOrders : "order/placemultipleorder"
 
 }
 export default endPoints

@@ -15,6 +15,8 @@ function SingleRestaurantComponent({openClose , restId}) {
     const [count , setCount] = useState(0)
     const [addedItems, setAddedItems] = useState([]);
     const [openSlip , setOpenSlip] =useState(false)
+    const [selectedMenu , setSelectedMenu] =useState([])
+    
 
     useEffect(()=>{
         getSinglerest()
@@ -34,8 +36,9 @@ function SingleRestaurantComponent({openClose , restId}) {
 
     
     const handleAddToCart = (menu) => {
-        setAddedItems((prev) => [...prev, menu.itemName])
+         setAddedItems((prev) => [...prev , menu.itemName])
          setCount((prevCount) => prevCount + 1);
+         setSelectedMenu((prev)=> [...prev , menu])        
     }
     
   return (
@@ -48,7 +51,7 @@ function SingleRestaurantComponent({openClose , restId}) {
           <FoodBankIcon fontSize='large' onClick={()=>setOpenSlip(true)}></FoodBankIcon> 
             {count}
         </Box>
-        {openSlip && <OrderSlip chosedItems={addedItems}/>}
+        {openSlip && <OrderSlip  menu={selectedMenu}/>}
         
       {!openSlip && (<Box display={"flex"} gap={"20px"} width={"100%"} flexWrap={"wrap"}>
         {
