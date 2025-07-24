@@ -25,7 +25,9 @@ const endPoints = {
     approvedMenu : "menu/getapprovedmenu",
     placeOrder : "order/placeorder",
     getSingleRest : "restaurant/getsinglerest",
-    multipleOrders : "order/placemultipleorder"
+    multipleOrders : "order/placemultipleorder",
+    getMyOrders : "order/myOrders",
+    orderTomyRest : "order/orderForvendor"
 
 }
 export default endPoints

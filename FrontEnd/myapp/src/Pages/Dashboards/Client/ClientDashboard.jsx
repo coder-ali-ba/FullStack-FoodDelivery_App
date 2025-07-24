@@ -44,7 +44,7 @@ function  ClientDashboard () {
              }
             {!open && <div>
         <Typography align='center' variant='h6'>Restaurants</Typography>
-      <Stack direction={"row"} flexWrap={"wrap"} sx={{ gap:"10px", justifyContent:"center"}}>
+      <Stack direction={"row"} flexWrap={"wrap"} gap={"50px"} justifyContent={"center"}>
         {rests.map((rest , index)=>(
           <Box component={"button"} onClick={()=>handleOpen(rest.restaurantName)} key={index} sx={{display : "flex" , width:"350px",borderRadius:"5px", boxShadow:"3px 3px 3px 3px lightGray", padding:"10px"}}>
              <Box>

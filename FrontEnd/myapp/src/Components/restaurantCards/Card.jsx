@@ -47,7 +47,7 @@ const RestaurantCard = () => {
     }
      
   }
-   console.log(datas);
+   
   
 
   const handleEdit = (id) => {

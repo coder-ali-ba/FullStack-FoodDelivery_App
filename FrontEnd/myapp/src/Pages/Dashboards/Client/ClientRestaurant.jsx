@@ -32,7 +32,7 @@ function ClientRestaurant() {
       console.log(error.message);     
     }   
   }
-  console.log(datas);
+  
   
 
   return (

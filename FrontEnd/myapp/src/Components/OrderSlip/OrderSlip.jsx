@@ -1,12 +1,14 @@
 import { Box, Button, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
 import axios from 'axios';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { BASE_URL } from '../../Utils/utility';
 import endPoints from '../../Constants/apiEndPoints';
 import Cookies from 'js-cookie';
 
 
 function OrderSlip({ menu }) {
+  const [menuItems , setMenuItems] =useState([])
+  const [menuPrice ,setMenuPrice] =useState([])
 
   // console.log(menu);
   
@@ -14,22 +16,36 @@ function OrderSlip({ menu }) {
   const price = parseFloat(item.itemPrice);
   return sum + price;
 }, 0);
+
+
+// setMenuItems(menu.map(item => item.itemName));
+useEffect(() => {
+  setMenuItems(menu.map(item => item.itemName));
+  setMenuPrice(menu.map(item => item.itemPrice));
+}, [])
   
-// const [{itemDesc , itemName , itemPrice},] = [...menu]
 
-// console.log(itemDesc , itemName , itemPrice);
-
-// menu.foreach(())
 
 
 const handlePlaceOrder = async() => {
-  const response = await axios.post(`${BASE_URL}${endPoints.multipleOrders}`,{},{
+  
+
+  const orderObj = {
+    items :menuItems,
+    prices :menuPrice,
+    restaurant : menu[0].restaurantName,
+    totalPrice : totalPrice
+  }
+
+
+  const response = await axios.post(`${BASE_URL}${endPoints.multipleOrders}`,orderObj,{
     headers : {
       Authorization : `Bearer ${Cookies.get("authToken")}`
     }
   })
   
-  console.log(response);
+  alert('Your Order Has Been placed')
+  
   
 }
   
