@@ -27,7 +27,11 @@ const endPoints = {
     getSingleRest : "restaurant/getsinglerest",
     multipleOrders : "order/placemultipleorder",
     getMyOrders : "order/myOrders",
-    orderTomyRest : "order/orderForvendor"
+    orderTomyRest : "order/orderForvendor",
+    acceptOrder : "order/orderaccept",
+    cancelOrder : "order/ordercancel",
+    deliverOrder : 'order/handleDelivered',
+    allOrders : "order/allorder"
 
 }
 export default endPoints
