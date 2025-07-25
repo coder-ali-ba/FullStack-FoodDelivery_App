@@ -23,7 +23,8 @@ const Login = () => {
       const response = await axios.post(`${BASE_URL}auth/login`, obj);
       const {token , data} =response.data;
        const verify =data.type
-       alert(data.message)
+       alert("logged In Successfully")
+
       
       
           
@@ -32,16 +33,25 @@ const Login = () => {
       if(token){
         Cookies.set("authToken" , token)
         if(verify =="admin"){
+         
+          localStorage.setItem("user" , "admin")
           navigate("/admin-dashboard")
           alert("ADMIN")
+          
         }
          if(verify=="vendor"){
+          localStorage.setItem("user" , "vendor")
           navigate('/vendor-dashboard')
           alert('VENDOR')
+          
+
         }
          if(verify == "customer"){
+          localStorage.setItem("user" , "customer")
           navigate("/client-dashboard")
           alert("CUSTOMER")
+          
+
         }
       }
       

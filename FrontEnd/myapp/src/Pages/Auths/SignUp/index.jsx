@@ -110,7 +110,7 @@ const Signup = () => {
            rules={{ required: "Account type is required" }}
            render={({ field }) => (
                <Select {...field} label="Type">
-                 <MenuItem value="admin">Admin</MenuItem>
+                 
                  <MenuItem value="vendor">Vendor</MenuItem>
                  <MenuItem value="customer">Customer</MenuItem>
                </Select>

@@ -15,6 +15,9 @@ import ClientDashboard from './Pages/Dashboards/Client/ClientDashboard'
 import ClientRestaurant from './Pages/Dashboards/Client/ClientRestaurant'
 import ClientMenu from './Pages/Dashboards/Client/ClientMenu'
 import ClientOrders from './Pages/Dashboards/Client/ClientOrders'
+import VendorRoutes from './Components/Routes/VendorRoutes'
+import AdminRoutes from './Components/Routes/AdminRoutes'
+import ClientRoutes from './Components/Routes/ClientRoutes'
 
 function App() {
   
@@ -23,31 +26,38 @@ function App() {
     <>
     
     <Routes>
-      <Route index element={<Login />}></Route>
-      <Route path='/signup' element={<Signup />}></Route>
+      
+         <Route index element={<Login />}></Route>
+         <Route path='/signup' element={<Signup />}></Route>
+     
 
 
       
-
-      <Route path='/vendor-dashboard' element={<VendorDashboard />}></Route>
-      <Route path='/vendor-menu' element={<Menu />}></Route>
-      <Route path='/vendor-order' element={<Order />}></Route>
-      <Route path='/vendor-restaurant' element={<Restaurant />}></Route>
-
+       <Route element={<VendorRoutes/>}>
+         <Route path='/vendor-dashboard' element={<VendorDashboard />}></Route>
+         <Route path='/vendor-menu' element={<Menu />}></Route>
+         <Route path='/vendor-order' element={<Order />}></Route>
+         <Route path='/vendor-restaurant' element={<Restaurant />}></Route>
+       </Route>
 
       //AdminRoutes
-       <Route path="/admin-dashboard" element={<AdminDashboard/>}></Route>
-       <Route path="/all-restaurant" element={<AllRestaurants/>}></Route> 
-       <Route path="/admin-order"  element={<Orders />}></Route>
-       <Route path="/admin-menu"  element={<AllMenu />}></Route>
+       <Route element={<AdminRoutes/>}>
+         <Route path="/admin-dashboard" element={<AdminDashboard/>}></Route>
+         <Route path="/all-restaurant" element={<AllRestaurants/>}></Route> 
+         <Route path="/admin-order"  element={<Orders />}></Route>
+         <Route path="/admin-menu"  element={<AllMenu />}></Route>
+       </Route>
 
        //Client
-       <Route path='/client-dashboard' element={<ClientDashboard/>}></Route>
-       <Route path='/client-restaurant' element={<ClientRestaurant/>}></Route>
-       <Route path='/client-menu' element={<ClientMenu/>}></Route>
-       <Route path='/client-order' element={<ClientOrders/>}></Route>
-       
-        </Routes>
+       <Route element={<ClientRoutes/>}>
+         <Route path='/client-dashboard' element={<ClientDashboard/>}></Route>
+         <Route path='/client-restaurant' element={<ClientRestaurant/>}></Route>
+         <Route path='/client-menu' element={<ClientMenu/>}></Route>
+         <Route path='/client-order' element={<ClientOrders/>}></Route>
+       </Route>
+
+
+    </Routes>
       
     </>
   )

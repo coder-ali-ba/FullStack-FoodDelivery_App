@@ -10,12 +10,14 @@ import SingleRestaurantComponent from '../../../Components/singleRestaurantCompo
 
 function  ClientDashboard () {
   const [rests , setRests] = useState([])
+  // const [approvedMenu , setApprovedMenu]=useState([])
   const [open , setOpen] = useState(false)
   const [id , setId]=useState()
 
 
  useEffect(()=>{
   getFunc()
+  // getMenu()
  },[])
 
 
@@ -29,8 +31,20 @@ function  ClientDashboard () {
      const{data} = allRestaurants.data
      setRests(data)
   }
-  const handleOpen = (id) => {
 
+  // const getMenu = async()=>{
+  //       const response = await axios.get(`${BASE_URL}${endPoints.approvedMenu}`,{
+  //           headers : {
+  //               Authorization : `Bearer ${Cookies.get("authToken")}`
+  //           }
+  //       })       
+  //       setApprovedMenu(response.data.data)
+  //   }
+
+  // console.log(approvedMenu);
+  
+
+  const handleOpen = (id) => {
     setOpen(true)
     setId(id)
   };
@@ -64,6 +78,14 @@ function  ClientDashboard () {
              
         ))}
       </Stack>
+
+
+      
+      {/* <Stack>
+        <Typography>jdnfjkd</Typography>
+      </Stack> */}
+
+
       </div>}
              
 
