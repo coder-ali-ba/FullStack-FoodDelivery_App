@@ -11,7 +11,7 @@ export default function MenuCard({allCards}) {
     
     
   return (
-    <Stack>
+    <Stack direction={"row"} gap={"20px"} flexWrap={"wrap"}>
 
     {allCards.map((card , index)=>(
     <Card sx={{ maxWidth: 345 }} key={index}>

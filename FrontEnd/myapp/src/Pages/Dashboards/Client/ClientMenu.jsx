@@ -33,7 +33,9 @@ function ClientMenu() {
     
   return (
     <ClientLayout>
-        <h1>ClientMenu</h1>
+          <h3 style={{textAlign:"center"}}>ClientMenu</h3>
+        
+        <div style={{display:"flex", flexWrap:"wrap", justifyContent:"center", gap:"20px"}}>
         {approvedMenu.map((menu , index)=>(
 
            <Card
@@ -88,6 +90,7 @@ function ClientMenu() {
     </Card>
 
         ))}
+        </div>
     </ClientLayout>
   )
 }

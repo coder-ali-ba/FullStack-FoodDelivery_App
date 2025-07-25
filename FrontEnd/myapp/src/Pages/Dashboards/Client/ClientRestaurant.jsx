@@ -37,6 +37,7 @@ function ClientRestaurant() {
 
   return (
 <ClientLayout>
+  <h3 style={{textAlign:"center"}}>All Restaurants</h3>
     <Stack direction={"row"} gap={"40px"} flexWrap={"wrap"} justifyContent={"center"}>
        {datas.map((data)=>(
         <Card sx={{ maxWidth: 345 }}>
@@ -64,7 +65,6 @@ function ClientRestaurant() {
                 backgroundColor : data.isOpen ? "#148fe7ff" : "orange",
                 color : 'white'
              }}>{data.isOpen ? "Opened" : "Closed"}</Button>
-             <Button size="small">Learn More</Button>
           </CardActions>
        </Card>
        ))}

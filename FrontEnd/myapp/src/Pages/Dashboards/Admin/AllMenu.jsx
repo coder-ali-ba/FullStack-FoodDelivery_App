@@ -45,7 +45,7 @@ function AllMenu() {
 
   return (
     <AdminLayout>
-        <h1>All Menues</h1>
+        <h3 style={{textAlign:"center"}}>All Menues</h3>
         <Stack direction={"row"} justifyContent={"center"} flexWrap={"wrap"} gap={"30px"}>
         {menus.map((menu , index)=>(
             <Card sx={{ maxWidth: 345 }} key={index}>
@@ -61,7 +61,7 @@ function AllMenu() {
                 <Typography gutterBottom variant="h5" component="div">
                   Restaurant : {menu.restaurantName}
                 </Typography>
-                <Typography gutterBottom variant="h5" component="div">
+                <Typography gutterBottom  component="div">
                   Item Desc :{menu.itemDesc}
                 </Typography>
                 <Typography variant="body2" sx={{ color: 'text.secondary' }}>

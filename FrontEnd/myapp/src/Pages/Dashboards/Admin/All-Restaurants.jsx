@@ -27,7 +27,7 @@ const [datas , setDatas] =useState([])
       });
       
        setDatas(response.data.data)
-      console.log(response);
+      
       
     } catch (error) {
       console.log(error.message);
@@ -56,7 +56,7 @@ const [datas , setDatas] =useState([])
   
   return (
     <AdminLayout>
-        <h1>All Restaurants</h1>
+        <h3 style={{textAlign:"center"}}>All Restaurants</h3>
         <TableContainer component={Paper}>
       <Table>
         <TableHead>

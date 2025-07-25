@@ -30,7 +30,7 @@ function ClientOrders() {
 
   return (
     <ClientLayout>
-        <h1>Client Orders</h1>
+        <h3 style={{textAlign:"center"}}>your Orders</h3>
          <Table>
           <TableHead>
             <TableRow>

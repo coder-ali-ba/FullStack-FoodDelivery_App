@@ -20,6 +20,7 @@ import GridViewIcon from '@mui/icons-material/GridView';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
 import { Link } from 'react-router-dom';
+import logo from "../../assets/ChatGPT Image Jul 25, 2025, 07_16_33 PM.png"
 
 
 const drawerWidth = 240;
@@ -70,17 +71,18 @@ function AdminLayout(props) {
 
   const drawer = (
     <div>
-      <Toolbar />
-      <Divider />
+      
+      <div style={{backgroundColor:"#0b70cfff", textAlign:"center"}}> <img src={logo} alt="" style={{width:"100px", height:"58px", borderRadius:"50%"}}/></div>
+      
       <List>
         {adminArray.map((item, index) => (
-          <ListItem key={index} disablePadding>
+          <ListItem key={index} disablePadding sx={{boxShadow:"1px 1px 1px 1px lightGray"}}>
             <ListItemButton>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
               </ListItemIcon>
               
-              <Link to={item.url}>{item.name}</Link>
+              <Link style={{ textDecoration: 'none', color: 'inherit' }} to={item.url}  >{item.name}</Link>
             </ListItemButton>
           </ListItem>
         ))}
@@ -111,10 +113,11 @@ function AdminLayout(props) {
             onClick={handleDrawerToggle}
             sx={{ mr: 2, display: { sm: 'none' } }}
           >
+          
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Responsive drawer
+            Admin Saylani PAPA
           </Typography>
         </Toolbar>
       </AppBar>

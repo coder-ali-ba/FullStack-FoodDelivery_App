@@ -21,6 +21,7 @@ import StorefrontIcon from '@mui/icons-material/Storefront';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
 import { Link } from 'react-router-dom';
+import logo from "../../assets/ChatGPT Image Jul 25, 2025, 07_16_33 PM.png"
 
 const drawerWidth = 240;
 
@@ -75,8 +76,7 @@ function ClientLayout(props) {
 
   const drawer = (
     <div>
-      <Toolbar />
-      <Divider />
+      <div style={{backgroundColor:"#0b70cfff", textAlign:"center"}}> <img src={logo} alt="" style={{width:"100px", height:"58px", borderRadius:"50%"}}/></div>
       <List>
         {clientLists.map((list, index) => (
           <ListItem key={list.name} disablePadding>
@@ -117,7 +117,7 @@ function ClientLayout(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Responsive drawer
+            Customer Saylani PAPA
           </Typography>
         </Toolbar>
       </AppBar>

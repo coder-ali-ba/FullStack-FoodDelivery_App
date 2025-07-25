@@ -4,7 +4,8 @@ import axios from 'axios'
 import { BASE_URL } from '../../../Utils/utility'
 import Cookies from 'js-cookie'
 import endPoints from '../../../Constants/apiEndPoints'
-import { Typography } from '@mui/material'
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
+
 
 function Orders() {
   const [datas , setDatas] =useState([])
@@ -24,14 +25,73 @@ function Orders() {
     setDatas(data)
   }
 
+  // console.log(datas);
+  
   return (
         <AdminLayout>
-            <h1>Orders</h1>
-            {
-              datas.map((data , index)=>(
-                <Typography>{data.totalPrice}</Typography>
-              ))
-            }
+            
+            
+            <TableContainer component={Paper} sx={{ margin: 'auto', mt: 4 }}>
+      <Typography variant="h6" align="center" sx={{ mt: 2 }}>
+        Order Details
+      </Typography>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>Items</TableCell>
+            <TableCell>Restaurant</TableCell>
+            <TableCell>Prices</TableCell>
+            <TableCell>Total Price</TableCell>
+            <TableCell>Ordered By</TableCell>
+            <TableCell>Status</TableCell>
+          </TableRow>
+          
+        </TableHead>
+        <TableBody>
+          {datas.map((data , index)=>(
+             <TableRow key={index}>
+                  <TableCell>
+                  {data.items.map((item )=>(                     
+                        <Typography>{item}</Typography>                     
+                  ))}
+                  </TableCell>
+                  <TableCell>{data.restaurant}</TableCell>
+                  <TableCell>
+                    {
+                      data.prices.map((price)=>(
+                        <Typography>{price}</Typography>
+                      ))
+                    }
+                  </TableCell>
+                  <TableCell>{data.totalPrice}</TableCell>
+                  <TableCell>{data.orderedBy}</TableCell>
+                  <TableCell 
+                     sx={{
+                      backgroundColor:
+                         data.status === 'accepted'
+                        ? 'success.main'
+                        : data.status === 'cancelled'
+                        ? 'error.main'
+                        : data.status === 'pending'
+                        ? 'warning.main'
+                        : data.status === 'delivered'
+                        ? 'primary.main'
+                        : 'grey.300', // fallback
+                        color: 'white' // optional: makes text readable
+                     }}
+                  >
+                    {data.status === 'accepted' &&  "accepted"}
+                    {data.status === 'cancelled' && "cancelled"}
+                    {data.status === 'pending' && "pending"}
+                    {data.status === 'delivered' &&  "delivered"}
+                  </TableCell>
+             </TableRow>
+          ))}
+          
+        </TableBody>
+      </Table>
+    </TableContainer>
+            
         </AdminLayout>    
   )
 }

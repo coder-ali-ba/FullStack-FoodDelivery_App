@@ -46,17 +46,18 @@ function  ClientDashboard () {
         <Typography align='center' variant='h6'>Restaurants</Typography>
       <Stack direction={"row"} flexWrap={"wrap"} gap={"50px"} justifyContent={"center"}>
         {rests.map((rest , index)=>(
-          <Box component={"button"} onClick={()=>handleOpen(rest.restaurantName)} key={index} sx={{display : "flex" , width:"350px",borderRadius:"5px", boxShadow:"3px 3px 3px 3px lightGray", padding:"10px"}}>
+          <Box component={"button"} onClick={()=>handleOpen(rest.restaurantName)} key={index} sx={{ width:"350px",borderRadius:"5px", boxShadow:"3px 3px 3px 3px lightGray", padding:"10px"}}>
              <Box>
               <img src={rest.imageUrl} alt=""
                  width={"180px"}
+                 style={{borderRadius:"10px"}}
               />
              </Box>
              <Box pl={"10px"} >
-              <Typography mr={"10px"}>{rest.restaurantName}</Typography>
+              <Typography variant='h5' mr={"10px"}>{rest.restaurantName}</Typography>
               <Typography mr={"10px"}>{rest.details}</Typography>
-              <Typography mr={"10px"}>{rest.address}</Typography>
-              <Typography mr={"10px"}>{rest.email}</Typography>             
+              <Typography color='green' mr={"10px"}>{rest.address}</Typography>
+              <Typography color='blue' mr={"10px"}>{rest.email}</Typography>             
              </Box>
              
           </Box>
